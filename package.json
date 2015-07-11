@@ -2,10 +2,16 @@
   "name": "node-katas",
   "version": "0.0.0",
   "description": "Node TDD/BDD katas using Mocha, Chai and Sinon",
+  "repository": "https://github.com/dcaballeroc/node-katas",
   "main": "index.js",
   "scripts": {
     "test": "mocha spec/"
   },
   "author": "Danilo Caballero",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "latest",
+    "mocha": "latest",
+    "sinon": "latest"
+  }
 }
