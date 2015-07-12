@@ -32,15 +32,15 @@ describe('String calculator', function () {
   });
 
   describe('Delimiters', function () {
-    it('should accept new lines as separators', function () {
+    it('should accept new lines as delimiter', function () {
       add('7,3\n4').should.be.equal(14);
     });
 
-    it('should accept custom separators', function () {
+    it('should accept custom delimiter', function () {
       add('//;\n1;3;5').should.be.equal(9);
     });
 
-    it('should accept custom separators along with default ones', function () {
+    it('should accept custom delimiter along with default ones', function () {
       add('//_\n6,7\n1_2').should.be.equal(16);
     });
 
