@@ -4,11 +4,14 @@
   "description": "Node TDD/BDD katas using Mocha, Chai and Sinon",
   "repository": "https://github.com/dcaballeroc/node-katas",
   "main": "index.js",
+  "author": "Danilo Caballero",
+  "license": "MIT",
   "scripts": {
     "test": "mocha spec/"
   },
-  "author": "Danilo Caballero",
-  "license": "MIT",
+  "dependencies": {
+    "lodash": "latest"
+  },
   "devDependencies": {
     "chai": "latest",
     "mocha": "latest",
