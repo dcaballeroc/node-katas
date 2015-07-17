@@ -6,8 +6,39 @@ function hasCustomDelimiter(expression) {
   return /^\/\//.test(expression)
 }
 
-function getCustomDelimiter(expression) {
-  return expression.charAt(2);
+function hasMultiCharacterDelimiter(expression) {
+  return /\[[^\[\]\d\s]+\]/.test(expression);
+}
+
+function getMultiCharacterDelimiter(expression) {
+  var delimiters = expression.match(/\[[^\[\]\s]+\]/g);
+
+  for (var i = 0; i < delimiters.length; i++) {
+    delimiters[i] = delimiters[i].replace('[', '').replace(']', '')
+  }
+
+  return delimiters;
+}
+
+function getCustomDelimiters(expression) {
+  if (hasMultiCharacterDelimiter(expression))
+    return getMultiCharacterDelimiter(expression);
+
+  return [expression.charAt(2)];
+}
+
+function splitExpression(expressionPieces, delimiters) {
+  if (delimiters.length === 0)
+    return expressionPieces;
+
+  var pieces = [];
+  var delimiter = delimiters.pop();
+
+  for (var i = 0; i < expressionPieces.length; i++) {
+    pieces = pieces.concat(expressionPieces[i].split(delimiter));
+  }
+
+  return splitExpression(pieces, delimiters);
 }
 
 function getTokens(expression) {
@@ -15,13 +46,13 @@ function getTokens(expression) {
   var expr = expression;
 
   if (hasCustomDelimiter(expression)) {
-    delimiters.push(getCustomDelimiter(expr));
+    delimiters = delimiters.concat(getCustomDelimiters(expr));
     expr = expr.substring(expr.indexOf('\n') + 1);
   }
 
-  var delimitersRegex = new RegExp(delimiters.join('|'));
+  var tokens = splitExpression([expr], delimiters);
 
-  return expr.split(delimitersRegex);
+  return tokens;
 }
 
 function calculateSum(tokens) {

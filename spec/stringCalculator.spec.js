@@ -6,7 +6,7 @@ var chai = require('chai');
 chai.should();
 
 describe('String calculator', function () {
-  describe('Add function', function () {
+  describe('add function', function () {
     it('should return 0 when empty string is provided', function () {
       var result = add('');
 
@@ -31,7 +31,7 @@ describe('String calculator', function () {
     });
   });
 
-  describe('Delimiters', function () {
+  describe('delimiters', function () {
     it('should accept new lines as delimiter', function () {
       add('7,3\n4').should.be.equal(14);
     });
@@ -47,9 +47,13 @@ describe('String calculator', function () {
     it('should accept multi-char custom delimiter', function () {
       add('//[***]\n1***2***7').should.be.equal(10);
     });
+
+    it('should accept multiple custom delimiters', function () {
+      add('//[***][;][---]\n1***2;7---10').should.be.equal(20);
+    });
   });
 
-  describe('Negative number error', function () {
+  describe('negative number error', function () {
     it('should throw a RangeError when a negative number is found', function () {
       var evaluator = function () {
         add('4,-3,5');
